@@ -6,4 +6,4 @@
   :dependencies [[org.clojure/clojure "1.8.0"]]
   :main ^:skip-aot markov-tolkien.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.7.0"]]}})
