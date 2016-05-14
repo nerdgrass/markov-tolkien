@@ -38,3 +38,9 @@
         result-chain (walk-chain prefix word-chain prefix)
         result-text (chain->text result-chain)]
     result-text))
+
+(defn process-file [fname]
+  (text->word-chain
+   (slurp (clojure.java.io/resource fname))))
+
+(generate-text "And the" (process-file "quangle-wangle.txt"))
