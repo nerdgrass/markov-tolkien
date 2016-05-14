@@ -16,3 +16,11 @@ word-transitions
                                  {[a b] (if c #{c} #{})})))
           {}
           word-transitions))
+
+(defn walk-chain [prefix chain result]
+  (let [suffixes (get chain prefix)]
+    (if (empty? suffixes)
+      result
+      (let [suffix (first (shuffle suffixes))
+            new-prefix [(last prefix) suffix]]
+        (recur new-prefix chain (conj result suffix))))))
