@@ -17,10 +17,21 @@ word-transitions
           {}
           word-transitions))
 
+
+
+(defn chain->text [chain]
+  (apply str (interpose " " chain)))
+
 (defn walk-chain [prefix chain result]
   (let [suffixes (get chain prefix)]
     (if (empty? suffixes)
       result
       (let [suffix (first (shuffle suffixes))
-            new-prefix [(last prefix) suffix]]
-        (recur new-prefix chain (conj result suffix))))))
+            new-prefix [(last prefix) suffix]
+            result-with-spaces (chain->text result)
+            result-char-count (count result-with-spaces)
+            suffix-char-count (inc (count suffix))
+            new-result-char-count (+ result-char-count suffix-char-count)]
+        (if (>= new-result-char-count 140)
+          result
+          (recur new-prefix chain (conj result suffix)))))))
