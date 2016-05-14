@@ -13,10 +13,6 @@
               ["And" "the"] #{"Pobble" "Golden"}}
              (word-chain example))))))
 
-(defn text->word-chain [s]
- (let [words (clojure.string/split s #"[\s|\n]")
-       word-transitions (partition-all 3 1 words)]
-   (word-chain word-transitions)))
 
 (deftest test-text->word-chain
  (testing "string with spaces and newlines"
