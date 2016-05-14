@@ -35,3 +35,11 @@ word-transitions
         (if (>= new-result-char-count 140)
           result
           (recur new-prefix chain (conj result suffix)))))))
+
+
+(defn generate-text
+  [start-phrase word-chain]
+  (let [prefix (clojure.string/split start-phrase #" ")
+        result-chain (walk-chain prefix word-chain prefix)
+        result-text (chain->text result-chain)]
+    result-text))
