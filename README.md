@@ -1,6 +1,7 @@
 # markov-tolkien
 
-FIXME: description
+A markov-chain twitter bot based on Carin Meier's [How I Start](http://howistart.org/posts/clojure/1) tutorial. Instead of Edward Lear,
+I opt for J.R.R Tolkien as far as source material.
 
 ## Installation
 
@@ -15,18 +16,6 @@ FIXME: explanation
 ## Options
 
 FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
