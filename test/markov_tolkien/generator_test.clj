@@ -1,6 +1,6 @@
-(ns markov-tolkien.core-test
+(ns markov-tolkien.generator-test
   (:require [clojure.test :refer :all]
-            [markov-tolkien.core :refer :all]))
+            [markov-tolkien.generator :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
