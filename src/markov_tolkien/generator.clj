@@ -73,6 +73,11 @@
   (let [text (generate-text (-> prefix-list shuffle first) functional-tolkien)]
     (end-at-last-punctuation text)))
 
+(def my-creds (twitter-oauth/make-oauth-creds (env :app-consumer-key)
+                                              (env :app-consumer-secret)
+                                              (env :user-access-token)
+                                              (env :user-access-secret)))
+
 (defn status-update []
   (let [tweet (tweet-text)]
     (println "generated tweet is :" tweet)
