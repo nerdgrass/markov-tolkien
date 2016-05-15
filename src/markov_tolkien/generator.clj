@@ -44,7 +44,7 @@
    (slurp (clojure.java.io/resource fname))))
 
 (def files ["concerning-hobbits.txt" "monad.txt" "clojure.txt" "fp.txt" "elm.txt"
-            "haskell.txt" "lambda.txt" "valaquenta.txt"])
+            "concerning-pipe-weed.txt" "haskell.txt" "lambda.txt" "music-of-ainur.txt" "valaquenta.txt"])
 (def functional-tolkien (apply merge-with clojure.set/union (map process-file files)))
 (def prefix-list ["On the" "It is" "And all" "We think"
                   "For every" "No other" "To a" "And every"
@@ -58,4 +58,17 @@
                   "To the" "He is" "And nobody" "And it's"
                   "For any" "For example," "With the" "Haskell is"])
 
-(generate-text "in the" functional-tolkien)
+(defn end-at-last-punctuation [text]
+  (let [trimmed-to-last-punct (apply str (re-seq #"[\s\w]+[^.!?,]*[.!?,]" text))
+        trimmed-to-last-word (apply str (re-seq #".*[^a-zA-Z]+" text))
+        result-text (if (empty? trimmed-to-last-punct)
+                      trimmed-to-last-word
+                      trimmed-to-last-punct)
+        cleaned-text (clojure.string/replace result-text #"[,| ]$" ".")]
+    (clojure.string/replace cleaned-text #"\"" "'")))
+
+(defn tweet-text []
+  (let [text (generate-text (-> prefix-list shuffle first) functional-tolkien)]
+    (end-at-last-punctuation text)))
+
+(tweet-text)
