@@ -1,5 +1,7 @@
 (ns markov-tolkien.generator
-  (:gen-class))
+  (:require [twitter.api.restful :as twitter]
+            [twitter.oauth :as twitter-oauth]
+            [environ.core :refer [env]]))
 
 
 (defn word-chain [word-transitions]
@@ -71,4 +73,12 @@
   (let [text (generate-text (-> prefix-list shuffle first) functional-tolkien)]
     (end-at-last-punctuation text)))
 
-(tweet-text)
+(defn status-update []
+  (let [tweet (tweet-text)]
+    (println "generated tweet is :" tweet)
+    (println "char count is:" (count tweet))
+    (when (not-empty tweet)
+      (try (twitter/statuses-update :oauth-creds my-creds
+                                    :params {:status tweet})
+           (catch Exception e (println "Oh no! " (.getMessage e)))))))
+(status-update)
