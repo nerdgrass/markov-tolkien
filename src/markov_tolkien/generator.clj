@@ -43,4 +43,8 @@
   (text->word-chain
    (slurp (clojure.java.io/resource fname))))
 
-(generate-text "And the" (process-file "quangle-wangle.txt"))
+(def files ["concerning-hobbits.txt" "monad.txt" "clojure.txt" "fp.txt" "elm.txt"
+            "music-of-ainur.txt" "valaquenta.txt"])
+(def functional-tolkien (apply merge-with clojure.set/union (map process-file files)))
+
+(generate-text "in the" functional-tolkien)
