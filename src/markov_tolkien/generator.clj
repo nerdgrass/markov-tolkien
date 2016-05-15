@@ -46,4 +46,16 @@
 (def files ["concerning-hobbits.txt" "monad.txt" "clojure.txt" "fp.txt" "elm.txt"
             "haskell.txt" "lambda.txt" "valaquenta.txt"])
 (def functional-tolkien (apply merge-with clojure.set/union (map process-file files)))
+(def prefix-list ["On the" "It is" "And all" "We think"
+                  "For every" "No other" "To a" "And every"
+                  "They do" "For his" "And the" "But the"
+                  "Are the" "In the" "For the" "It was"
+                  "In the" "For it" "With only" "Are the"
+                  "Though the"  "And when"
+                  "The last" "And this" "No other" "With a"
+                  "And at" "What a" "Of the"
+                  "They crossed" "So that" "And all" "When they"
+                  "To the" "He is" "And nobody" "And it's"
+                  "For any" "For example," "With the" "Haskell is"])
+
 (generate-text "in the" functional-tolkien)
